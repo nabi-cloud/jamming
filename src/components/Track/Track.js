@@ -2,14 +2,26 @@ import React from 'react';
 
 import './Track.css';
 
-function Track() {
+function Track({ track, onAdd, isRemoval }) {
+
+    // Change sign whether track is added or not
+    const renderAction = () => {
+        return isRemoval ? <button className="Track-action" onClick={ addTrack }>-</button>
+        : <button className="Track-action" onClick={ addTrack }>+</button>
+    };
+
+    // Method to add track in the playlist
+    const addTrack = () => {
+        onAdd(track);
+    };
+
     return (
         <div className="Track">
             <div className="Track-information">
-                <h3> {/*!-- track name will go here*/} </h3>
-                <p>{/*<!-- track artist will go here--> | <!-- track album will go here -->*/}</p>
+                <h3>{track.name}</h3>
+                <p>{track.album.name} | {track.artists[0].name}</p>
             </div>
-            <button className="Track-action">{/*<!-- + or - will go here -->*/}</button>
+            { renderAction() }
         </div>
     );
 };
