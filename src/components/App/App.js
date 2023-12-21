@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { tracks } from './responseSample';
-import { playlist } from './playlistSample';
 
 import './App.css';
 
@@ -11,6 +10,7 @@ import Playlist from '../Playlist/Playlist';
 
 function App() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
+    const [playlistName, setPlaylistName] = useState('My Playlist');
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -20,10 +20,20 @@ function App() {
         if (!isTrackAdded) {
             // If the track is not already in the playlistTracks, add it
             setPlaylistTracks((prevTracks) => [...prevTracks, trackToAdd]);
-            alert(`Added track with id ${trackToAdd.id} to playlistTracks`);
         } else {
-            alert(`Track with id ${trackToAdd.id} is already in playlistTracks`);
+            alert(`${trackToAdd.name} is already in your playlist`);
         }
+    };
+
+    // Method to remove tracks from Playlist
+    const removeTrack = (trackToRemove) => {
+        const updatedPlaylist = playlistTracks.filter((track) => track.id !== trackToRemove.id);
+        setPlaylistTracks(updatedPlaylist);
+    };
+
+    // Method to rename playlist
+    const updatePlaylistName = (name) => {
+        setPlaylistName(name);
     };
 
     return (
@@ -33,11 +43,14 @@ function App() {
                 <SearchBar />
                 <div className="App-playlist">
                     <SearchResults
-                        tracks={tracks.items}
+                        tracks={ tracks.items }
                         onAdd={ addTrack }
                     />
                     <Playlist
-                        tracks={playlist.tracks}
+                        tracks={ playlistTracks }
+                        onRemove={ removeTrack }
+                        onNameChange={ updatePlaylistName }
+                        playlistName={ playlistName }
                     />
                 </div>
             </div>

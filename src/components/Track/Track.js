@@ -2,17 +2,25 @@ import React from 'react';
 
 import './Track.css';
 
-function Track({ track, onAdd, isRemoval }) {
+function Track({ track, onAdd, isRemoval, onRemove }) {
 
     // Change sign whether track is added or not
     const renderAction = () => {
-        return isRemoval ? <button className="Track-action" onClick={ addTrack }>-</button>
-        : <button className="Track-action" onClick={ addTrack }>+</button>
+        if (isRemoval) {
+            return <button className="Track-action" onClick={ removeTrack }>-</button>
+        } else {
+            return <button className="Track-action" onClick={ addTrack }>+</button>
+        }
     };
 
     // Method to add track in the playlist
     const addTrack = () => {
         onAdd(track);
+    };
+
+    // Method to remove track in the playlist
+    const removeTrack = () => {
+        onRemove(track);
     };
 
     return (

@@ -7,8 +7,9 @@
 
 .Track-action {
     cursor: pointer;
-    padding: .5rem;
-    font-size: 1.05rem;
+    padding: 0.2rem;
+    margin: 0 1rem;
+    font-size: 1.5rem;
     transition: color .25s;
     border: 0px;
     background-color: rgba(0, 0, 0, 0);
