@@ -36,6 +36,18 @@ function App() {
         setPlaylistName(name);
     };
 
+    // Method to save playlist to user's account
+    const savePlaylist = () => {
+        // Generate an array of uri values from the playlistTracks property
+        const trackURIs = playlistTracks.map(track => track.uri);
+
+        // Request to Spotify API
+
+        // Reset the state of after saving the playlist to the user's account
+        setPlaylistName('My Playlist');
+        setPlaylistTracks([]);
+    };
+
     return (
         <div>
             <h1>Ja<span className="highlight">mm</span>ing</h1>
@@ -51,6 +63,7 @@ function App() {
                         onRemove={ removeTrack }
                         onNameChange={ updatePlaylistName }
                         playlistName={ playlistName }
+                        onSave={ savePlaylist }
                     />
                 </div>
             </div>

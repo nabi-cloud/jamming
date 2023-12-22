@@ -10,7 +10,8 @@ export const tracks = {
                 }
             ],
             id: "5enxwA8aAbwZbf5qCHORXi",
-            name: "All Too Well (10 Minute Version) (Taylor's Version) (From The Vault)"
+            name: "All Too Well (10 Minute Version) (Taylor's Version) (From The Vault)",
+            uri: "spotify:track:5enxwA8aAbwZbf5qCHORXi"
         },
         {   
             album: {
@@ -22,7 +23,8 @@ export const tracks = {
                 }
             ],
             id: "5KD6AEm19QnMbfWpfoOHMl",
-            name: "Now That We Don't Talk (Taylor's Version) (From The Vault)"
+            name: "Now That We Don't Talk (Taylor's Version) (From The Vault)",
+            uri: "spotify:track:5KD6AEm19QnMbfWpfoOHMl"
         },
         {   
             album: {
@@ -34,7 +36,8 @@ export const tracks = {
                 }
             ],
             id: "4s8BIKx4Zh6ryAEz8RTlaU",
-            name: "Foolish One (Taylor’s Version) (From The Vault)"
+            name: "Foolish One (Taylor’s Version) (From The Vault)",
+            uri: "spotify:track:4s8BIKx4Zh6ryAEz8RTlaU"
         },
         {   
             album: {
@@ -46,7 +49,8 @@ export const tracks = {
                 }
             ],
             id: "4P9Q0GojKVXpRTJCaL3kyy",
-            name: "All Of The Girls You Loved Before"
+            name: "All Of The Girls You Loved Before",
+            uri: "spotify:track:4P9Q0GojKVXpRTJCaL3kyy"
         },
         {   
             album: {
@@ -58,7 +62,8 @@ export const tracks = {
                 }
             ],
             id: "2dgFqt3w9xIQRjhPtwNk3D",
-            name: "Death By A Thousand Cuts"
+            name: "Death By A Thousand Cuts",
+            uri: "spotify:track:2dgFqt3w9xIQRjhPtwNk3D"
         },
         {   
             album: {
@@ -70,7 +75,8 @@ export const tracks = {
                 }
             ],
             id: "3UMrglJeju5yWyYIW6o99b",
-            name: "The Great War"
+            name: "The Great War",
+            uri: "spotify:track:2VuqMjgoKaOHNM8HpxtXKx"
         },
         {   
             album: {
@@ -82,7 +88,8 @@ export const tracks = {
                 }
             ],
             id: "1msEuwSBneBKpVCZQcFTsU",
-            name: "Forever & Always (Taylor’s Version)"
+            name: "Forever & Always (Taylor’s Version)",
+            uri: "spotify:track:01QdEx6kFr78ZejhQtWR5m"            
         },
         {
             album: {
@@ -94,7 +101,8 @@ export const tracks = {
                 }
             ],
             id: "4qUijfYU8EoIWiY6oSyrgT",
-            name: "Bye Bye Baby (Taylor’s Version) (From The Vault)"
+            name: "Bye Bye Baby (Taylor’s Version) (From The Vault)",
+            uri: "spotify:track:4qUijfYU8EoIWiY6oSyrgT"  
         },
         {
             album: {
@@ -106,7 +114,8 @@ export const tracks = {
                 }
             ],
             id: "3zwMVvkBe2qIKDObWgXw4N",
-            name: "right where you left me - bonus track"
+            name: "right where you left me - bonus track",
+            uri: "spotify:track:3zwMVvkBe2qIKDObWgXw4N"
         },
         {
             album: {
@@ -118,7 +127,8 @@ export const tracks = {
                 }
             ],
             id: "4R2kfaDFhslZEMJqAFNpdd",
-            name: "cardigan"
+            name: "cardigan",
+            uri: "spotify:track:4R2kfaDFhslZEMJqAFNpdd"
         }
     ]
 };
