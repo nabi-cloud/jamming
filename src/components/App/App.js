@@ -48,11 +48,18 @@ function App() {
         setPlaylistTracks([]);
     };
 
+    // Method to search a track
+    const search = (term) => {
+        console.log(term);
+    };
+
     return (
         <div>
             <h1>Ja<span className="highlight">mm</span>ing</h1>
             <div className="App">
-                <SearchBar />
+                <SearchBar
+                    onSearch={ search }
+                />
                 <div className="App-playlist">
                     <SearchResults
                         tracks={ tracks.items }
