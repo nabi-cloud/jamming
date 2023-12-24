@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const redirectUri = 'http://localhost:3000/';
 let accessToken = '';
@@ -34,5 +32,38 @@ export const Spotify = {
 
             window.location = accessUrl;
         }
+    },
+
+    // Search Request to Spoftify API
+    search(term) {
+        const accessToken = Spotify.getAccessToken();
+
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        .then( response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Spotify Request Failed!');
+        })
+        .then(data => {
+            if (!data.tracks || !data.tracks.items) {
+                return [];
+            }
+            return data.tracks.items.map(track => ({
+                id: track.id,
+                name: track.name,
+                artist: track.artists[0].name,
+                album: track.album.name,
+                uri: track.uri
+            }));
+        })
+        .catch(error => {
+            console.log(error);
+            return [];
+        });
     }
 };

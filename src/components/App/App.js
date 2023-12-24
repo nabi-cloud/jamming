@@ -8,9 +8,12 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
+import { Spotify } from '../../utils/Spotify';
+
 function App() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
     const [playlistName, setPlaylistName] = useState('My Playlist');
+    const [searchResults, setSearchResults] = useState([]);
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -50,7 +53,14 @@ function App() {
 
     // Method to search a track
     const search = (term) => {
-        console.log(term);
+        try {
+            Spotify.search(term)
+            .then(results => {
+                setSearchResults(results);
+            })
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
