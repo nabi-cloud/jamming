@@ -7,9 +7,9 @@ function Track({ track, onAdd, isRemoval, onRemove }) {
     // Change sign whether track is added or not
     const renderAction = () => {
         if (isRemoval) {
-            return <button className="Track-action" onClick={ removeTrack }>-</button>
+            return <button className="Track-action" onClick={ removeTrack }>-</button>;
         } else {
-            return <button className="Track-action" onClick={ addTrack }>+</button>
+            return <button className="Track-action" onClick={ addTrack }>+</button>;
         }
     };
 
@@ -27,7 +27,7 @@ function Track({ track, onAdd, isRemoval, onRemove }) {
         <div className="Track">
             <div className="Track-information">
                 <h3>{track.name}</h3>
-                <p>{track.artists[0].name} | {track.album.name}</p>
+                <p>{track.artist} | {track.album}</p>
             </div>
             { renderAction() }
         </div>

@@ -10,7 +10,7 @@ function Tracklist({ tracks, onAdd, isRemoval, onRemove }) {
                 tracks && tracks.map(track => {
                     return (
                         <Track
-                            id={ track.id }
+                            key={ track.id }
                             {...{ track, onAdd, onRemove, isRemoval }}
                         />
                     );

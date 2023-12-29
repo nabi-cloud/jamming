@@ -13,7 +13,6 @@ function SearchBar({ onSearch }) {
    // Event handler when term is typed in input
    const handleTermChange = (event) => {
       setTerm(event.target.value);
-      event.preventDefault();
    };
 
    // Event handler when searching on key press

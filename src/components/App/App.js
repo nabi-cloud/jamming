@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import { tracks } from './responseSample';
-
 import './App.css';
 
 import SearchBar from '../SearchBar/SearchBar';
@@ -42,13 +40,19 @@ function App() {
     // Method to save playlist to user's account
     const savePlaylist = () => {
         // Generate an array of uri values from the playlistTracks property
-        const trackURIs = playlistTracks.map(track => track.uri);
+        const trackUris = playlistTracks.map(track => track.uri);
 
         // Request to Spotify API
+        try {
+            Spotify.savePlaylist(playlistName, trackUris)
+            .then(() => {
+                setPlaylistName('My Playlist');
+                setPlaylistTracks([]);
+            })
 
-        // Reset the state of after saving the playlist to the user's account
-        setPlaylistName('My Playlist');
-        setPlaylistTracks([]);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // Method to search a track
@@ -72,7 +76,7 @@ function App() {
                 />
                 <div className="App-playlist">
                     <SearchResults
-                        tracks={ tracks.items }
+                        tracks={ searchResults }
                         onAdd={ addTrack }
                     />
                     <Playlist

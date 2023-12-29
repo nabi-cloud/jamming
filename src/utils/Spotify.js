@@ -43,7 +43,7 @@ export const Spotify = {
                 Authorization: `Bearer ${accessToken}`
             }
         })
-        .then( response => {
+        .then(response => {
             if (response.ok) {
                 return response.json();
             }
@@ -64,6 +64,48 @@ export const Spotify = {
         .catch(error => {
             console.log(error);
             return [];
+        });
+    },
+
+    // Save playlist to user's Spotify account
+    savePlaylist(playlistName, trackUris) {
+        if (!playlistName || !trackUris.length) {
+            return;
+        }
+
+        const accessToken = Spotify.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}` };
+        let userId;
+
+        return fetch(`https://api.spotify.com/v1/me`, { headers: headers })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Spotify Request Failed!');
+        })
+        .then(jsonResponse => {
+            userId = jsonResponse.id;
+
+            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+                headers: headers,
+                method: 'POST',
+                body: JSON.stringify({ name: playlistName })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Spotify Request Failed!');
+            })
+            .then(jsonResponse => {
+                const playlistId = jsonResponse.id;
+                return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({ uris: trackUris })
+                })
+            })
         });
     }
 };
