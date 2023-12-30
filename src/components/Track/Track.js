@@ -25,6 +25,10 @@ function Track({ track, onAdd, isRemoval, onRemove }) {
 
     return (
         <div className="Track">
+            <img className='Track-image'
+                alt={ track.name }
+                src={ track.image }
+            />
             <div className="Track-information">
                 <h3>{track.name}</h3>
                 <p>{track.artist} | {track.album}</p>
