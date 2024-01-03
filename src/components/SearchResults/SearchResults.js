@@ -3,7 +3,7 @@ import React from 'react';
 import './SearchResults.css';
 import Tracklist from '../Tracklist/Tracklist';
 
-function SearchResults({ tracks, onAdd }) {
+function SearchResults({ tracks, onAdd, onPlayPreview, isPlaying }) {
     return (
         <div className="SearchResults">
             <h2>Results</h2>
@@ -11,6 +11,8 @@ function SearchResults({ tracks, onAdd }) {
                 tracks={ tracks }
                 onAdd={ onAdd }
                 isRemoval={ false }
+                onPlayPreview = { onPlayPreview }
+                isPlaying={ isPlaying }
             />
         </div>
     );

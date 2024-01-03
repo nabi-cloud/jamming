@@ -47,7 +47,7 @@ export const Spotify = {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error('Spotify Request Failed!');
+            throw new Error('Spotify Access Token Request Failed!');
         })
         .then(data => {
             if (!data.tracks || !data.tracks.items) {
@@ -83,7 +83,7 @@ export const Spotify = {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error('Spotify Request Failed!');
+            throw new Error('Saving Playlist Failed!');
         })
         .then(jsonResponse => {
             userId = jsonResponse.id;
@@ -97,7 +97,7 @@ export const Spotify = {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Spotify Request Failed!');
+                throw new Error('Saving Playlist Name Failed!');
             })
             .then(jsonResponse => {
                 const playlistId = jsonResponse.id;
@@ -107,6 +107,27 @@ export const Spotify = {
                     body: JSON.stringify({ uris: trackUris })
                 })
             })
+        });
+    },
+
+    // Fetch preview_url of track using id
+    getTrackPreview(id) {
+        const accessToken = Spotify.getAccessToken();
+        const headers = { Authorization: `Bearer ${accessToken}` };
+
+        return fetch(`https://api.spotify.com/v1/tracks/${id}`, { headers: headers })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Track Preview Request Failed!');
+        })
+        .then(data => {
+            return data.preview_url;
+        })
+        .catch(error => {
+            console.log(error);
+            return;
         });
     }
 };

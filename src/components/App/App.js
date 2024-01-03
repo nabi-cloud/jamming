@@ -12,6 +12,8 @@ function App() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
     const [playlistName, setPlaylistName] = useState('My Playlist');
     const [searchResults, setSearchResults] = useState([]);
+    const [playingAudio, setPlayingAudio] = useState(null);
+    const [isPlaying, setIsPlaying] = useState('');
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -67,6 +69,30 @@ function App() {
         }
     };
 
+    // Method to play track preview
+    const playPreview = (id) => {
+        if (playingAudio) {
+            playingAudio.pause();  // Pause the currently playing audio
+            setIsPlaying('');
+        }
+
+        try {
+            Spotify.getTrackPreview(id)
+            .then(previewUrl => {
+                if (previewUrl) {
+                    const audio = new Audio(previewUrl);
+                    setPlayingAudio(audio);
+                    setIsPlaying(id);
+                    audio.play();
+                } else {
+                    console.log('No preview available for this track');
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div>
             <h1>Ja<span className="highlight">mm</span>ing</h1>
@@ -78,6 +104,8 @@ function App() {
                     <SearchResults
                         tracks={ searchResults }
                         onAdd={ addTrack }
+                        onPlayPreview={ playPreview }
+                        isPlaying={ isPlaying }
                     />
                     <Playlist
                         tracks={ playlistTracks }
@@ -85,6 +113,8 @@ function App() {
                         onNameChange={ updatePlaylistName }
                         playlistName={ playlistName }
                         onSave={ savePlaylist }
+                        onPlayPreview={ playPreview }
+                        isPlaying={ isPlaying }
                     />
                 </div>
             </div>

@@ -3,7 +3,7 @@ import React from 'react';
 import './Tracklist.css';
 import Track from '../Track/Track';
 
-function Tracklist({ tracks, onAdd, isRemoval, onRemove }) {
+function Tracklist({ tracks, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) {
     return (
         <div className="TrackList">
             {
@@ -11,7 +11,7 @@ function Tracklist({ tracks, onAdd, isRemoval, onRemove }) {
                     return (
                         <Track
                             key={ track.id }
-                            {...{ track, onAdd, onRemove, isRemoval }}
+                            {...{ track, onAdd, onRemove, isRemoval, onPlayPreview, isPlaying }}
                         />
                     );
                 })

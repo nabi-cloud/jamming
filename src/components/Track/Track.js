@@ -1,15 +1,21 @@
 import React from 'react';
 
 import './Track.css';
+import audioIcon from '../../icons/sound-bars.gif';
 
-function Track({ track, onAdd, isRemoval, onRemove }) {
-
+function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) {
     // Change sign whether track is added or not
     const renderAction = () => {
         if (isRemoval) {
-            return <button className="Track-action" onClick={ removeTrack }>-</button>;
+            return (
+                isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
+                <button className="Track-action" onClick={ removeTrack }>-</button>
+            );
         } else {
-            return <button className="Track-action" onClick={ addTrack }>+</button>;
+            return (
+                isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
+                <button className="Track-action" onClick={ addTrack }>+</button>
+            );
         }
     };
 
@@ -23,12 +29,20 @@ function Track({ track, onAdd, isRemoval, onRemove }) {
         onRemove(track);
     };
 
+    // Method to play audio preview of the track
+    const playPreview = () => {
+        onPlayPreview(track.id);
+    };
+
     return (
         <div className="Track">
-            <img className='Track-image'
-                alt={ track.name }
-                src={ track.image }
-            />
+            <div>
+                <img className='Track-image'
+                    alt={ track.name }
+                    src={ track.image }
+                    onClick={ playPreview }
+                />
+            </div>
             <div className="Track-information">
                 <h3>{track.name}</h3>
                 <p>{track.artist} | {track.album}</p>

@@ -3,7 +3,7 @@ import React from 'react';
 import './Playlist.css';
 import Tracklist from '../Tracklist/Tracklist';
 
-function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave }) {
+function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlayPreview, isPlaying }) {
 
     // Event handler on updating playlist name
     const handleChangeName = (event) => {
@@ -21,6 +21,8 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave }) {
                 tracks={ tracks }
                 isRemoval={ true }
                 onRemove={ onRemove }
+                onPlayPreview = { onPlayPreview }
+                isPlaying={ isPlaying }
             />
             <button className="Playlist-save" onClick={ onSave }>SAVE TO SPOTIFY</button>
         </div>
