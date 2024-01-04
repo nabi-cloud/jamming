@@ -7,6 +7,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
 import { Spotify } from '../../utils/Spotify';
+import Loader from '../Loader/Loader';
 
 function App() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -14,6 +15,7 @@ function App() {
     const [searchResults, setSearchResults] = useState([]);
     const [playingAudio, setPlayingAudio] = useState(null);
     const [isPlaying, setIsPlaying] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -23,8 +25,6 @@ function App() {
         if (!isTrackAdded) {
             // If the track is not already in the playlistTracks, add it
             setPlaylistTracks((prevTracks) => [...prevTracks, trackToAdd]);
-        } else {
-            alert(`${trackToAdd.name} is already in your playlist`);
         }
     };
 
@@ -44,6 +44,9 @@ function App() {
         // Generate an array of uri values from the playlistTracks property
         const trackUris = playlistTracks.map(track => track.uri);
 
+        // Set loading to true while saving the playlist
+        setIsLoading(true);
+
         // Request to Spotify API
         try {
             Spotify.savePlaylist(playlistName, trackUris)
@@ -51,9 +54,14 @@ function App() {
                 setPlaylistName('My Playlist');
                 setPlaylistTracks([]);
             })
+            .finally(() => {
+                // Set loading to false after the playlist is saved
+                setIsLoading(false);
+            });
 
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     };
 
@@ -104,6 +112,8 @@ function App() {
 
     return (
         <div>
+            {isLoading && <Loader />}
+
             <h1>Ja<span className="highlight">mm</span>ing</h1>
             <div className="App">
                 <SearchBar
@@ -115,6 +125,7 @@ function App() {
                         onAdd={ addTrack }
                         onPlayPreview={ playPreview }
                         isPlaying={ isPlaying }
+                        playlistTracks={ playlistTracks }
                     />
                     <Playlist
                         tracks={ playlistTracks }

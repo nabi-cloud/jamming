@@ -26,6 +26,7 @@
 .input-container {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .input-container label {
@@ -49,7 +50,7 @@
 }
 
 .Playlist-save:hover {
-    background: linear-gradient(to right, rgba(96, 225, 224, 0.8), rgba(135, 244, 181, 0.8));
+    background: linear-gradient(to right, rgba(96, 225, 224, 0.5), rgba(135, 244, 181, 0.5));
     color: #ffffff;
     transition: all ease-out 0.3s;
 }

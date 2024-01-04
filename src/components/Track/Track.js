@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Track.css';
-import audioIcon from '../../icons/sound-bars.gif';
+import audioIcon from './sound-bars.gif';
 
 function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) {
     // Change sign whether track is added or not
@@ -44,7 +44,7 @@ function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) 
                 />
             </div>
             <div className="Track-information">
-                <h3>{track.name}</h3>
+                <h3 style={{ color: isPlaying === track.id ? '#60E1E0' : '' }}>{track.name}</h3>
                 <p>{track.artist} | {track.album}</p>
             </div>
             { renderAction() }
