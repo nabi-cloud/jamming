@@ -71,8 +71,14 @@ function App() {
 
     // Method to play track preview
     const playPreview = (id) => {
+        function resetAudioState() {
+            setPlayingAudio(null);
+            setIsPlaying('');
+        }
+
         if (playingAudio) {
             playingAudio.pause();  // Pause the currently playing audio
+            setPlayingAudio(null);
             setIsPlaying('');
         }
 
@@ -81,6 +87,9 @@ function App() {
             .then(previewUrl => {
                 if (previewUrl) {
                     const audio = new Audio(previewUrl);
+
+                    audio.addEventListener('ended', resetAudioState);
+
                     setPlayingAudio(audio);
                     setIsPlaying(id);
                     audio.play();
@@ -118,6 +127,10 @@ function App() {
                     />
                 </div>
             </div>
+
+            <footer className='footer'>
+                <span>2023 | <i class="fa-brands fa-github"></i> nabi-cloud</span>
+            </footer>
         </div>
     );
 };

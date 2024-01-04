@@ -36,7 +36,7 @@ function SearchBar({ onSearch }) {
          />
          <button className="SearchButton" 
             onClick={ search }
-         >SEARCH</button>
+         ><i class="fa-solid fa-magnifying-glass"></i> SEARCH</button>
       </div>
    );
 };

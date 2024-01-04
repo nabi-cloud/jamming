@@ -12,7 +12,7 @@
     border: 1px solid #fff;
     border-radius: 10px;
     margin-bottom: 2.22rem;
-    color: #010c3f;
+    color: #25283D;
     text-align: center;
     font-family: 'Work Sans', sans-serif;
     font-size: 1rem;
@@ -31,16 +31,18 @@
     width: 8.11rem;
     padding: .77rem 0;
     border-radius: 54px;
-    background-color: #6c41ec;
+    background: linear-gradient(to right, #60E1E0, #87F4B5);
     text-align: center;
     font-family: 'Work Sans', sans-serif;
     font-size: .833rem;
     transition: background-color .25s;
     border: 0px;
-    color: #fff;
-    font-weight: 500;
+    color: #25283D;
+    font-weight: 700;
 }
 
 .SearchButton:hover {
-    background-color: rgba(108, 65, 233, .7);
+    background: linear-gradient(to right, rgba(96, 225, 224, 0.8), rgba(135, 244, 181, 0.8));
+    color: #ffffff;
+    transition: all ease-out 0.3s;
 }

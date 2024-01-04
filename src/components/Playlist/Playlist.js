@@ -12,11 +12,14 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
 
     return (
         <div className="Playlist">
-            <input
-                placeholder="My Playlist"
-                onChange={ handleChangeName }
-                value={ playlistName }
-            />
+            <div className='input-container'>
+                <input
+                    placeholder="My Playlist"
+                    onChange={ handleChangeName }
+                    value={ playlistName }
+                />
+                <label><i class="fa-solid fa-pen fa-lg"></i></label>
+            </div>
             <Tracklist
                 tracks={ tracks }
                 isRemoval={ true }

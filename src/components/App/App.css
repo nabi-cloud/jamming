@@ -16,7 +16,7 @@ html {
 
 h1 {
   padding: .77rem 0;
-  background-color: #010c3f;
+  background-color: #25283D;
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 1.88rem;
@@ -24,7 +24,10 @@ h1 {
 }
 
 h1 .highlight {
-  color: #6c41ec;
+  background: linear-gradient(to right, #60E1E0, #87F4B5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 h2 {
@@ -35,7 +38,9 @@ h2 {
 .App {
   height: 100%;
   padding: 0 17% 10% 17%;
-  background-color: #000000;
+  background-image: url('./background-cover.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
   color: #fff;
@@ -45,6 +50,22 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.footer {
+  background-color: #25283D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+}
+
+.footer span {
+  background: linear-gradient(to right, #60E1E0, #87F4B5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media only screen and (max-width: 1020px) {
