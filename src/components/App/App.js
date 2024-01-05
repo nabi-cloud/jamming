@@ -162,7 +162,7 @@ function App() {
             </div>
 
             <footer className='footer'>
-                <span>2023 | <i className="fa-brands fa-github"></i> nabi-cloud</span>
+                <span>2024 | <i className="fa-brands fa-github"></i> nabi-cloud</span>
             </footer>
         </div>
     );
