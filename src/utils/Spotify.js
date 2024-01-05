@@ -1,5 +1,5 @@
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const redirectUri = 'https://jamming-playlist-app.netlify.app/';
+const redirectUri = 'http://localhost:3000/';
 let accessToken = '';
 
 export const Spotify = {
@@ -55,10 +55,13 @@ export const Spotify = {
             }
             return data.tracks.items.map(track => ({
                 id: track.id,
+                trackUrl: track.external_urls.spotify,
                 image: track.album.images[1].url,
                 name: track.name,
                 artist: track.artists[0].name,
+                artistUrl: track.artists[0].external_urls.spotify,
                 album: track.album.name,
+                albumUrl: track.album.external_urls.spotify,
                 uri: track.uri
             }));
         })

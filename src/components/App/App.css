@@ -37,7 +37,7 @@ h2 {
 
 .App {
   height: 100%;
-  padding: 0 15% 10% 15%;
+  padding: 0 10% 10% 10%;
   background-image: url('./background-cover.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,18 +54,22 @@ h2 {
 
 .footer {
   background-color: #25283D;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 15vh;
+  row-gap: 1rem;
+  padding: 2rem 0;
 }
 
-.footer span {
-  background: linear-gradient(to right, #60E1E0, #87F4B5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-family: 'Poppins', sans-serif;
+.footer a {
+  cursor: pointer;
+}
+
+.spotifyLogo {
+  height: 40px;
 }
 
 @media only screen and (max-width: 1020px) {

@@ -15,17 +15,29 @@
     opacity: 0;
 }
 
-.Track-image {
-    cursor: pointer;
+.playAction {
     margin-right: 1rem;
-    height: 50px;
-    width: 50px;
+}
+
+.playAction i {
+    cursor: pointer;
+    margin: 0 1rem 0 0.75rem;
+}
+
+.playAction i:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.Track-image {
+    margin-right: 1rem;
+    height: 65px;
+    width: 65px;
 }
 
 .Track-action {
     cursor: pointer;
     font-size: 1.5rem;
-    margin: 0 0.5rem 0 1rem;
+    margin-left: 1rem;
     transition: color .25s;
     border: 0px;
     background-color: rgba(0, 0, 0, 0);
@@ -47,12 +59,34 @@
     justify-content: center;
 }
 
+.subcontainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.spotifyIcon {
+    cursor: pointer;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.Track-information a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.Track-information a:hover {
+    text-decoration: underline;
+}
+
 .Track-information h3 {
     font-size: 1.125rem;
     margin-bottom: .5rem;
 }
 
 .Track-information p {
+    color: #fff;
     font-size: .83rem;
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);

@@ -32,7 +32,7 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
                     isPlaying
                 }}
             />
-            <button className="Playlist-save" onClick={ onSave }>SAVE TO SPOTIFY</button>
+            <button className="Playlist-save" onClick={ onSave }>SAVE PLAYLIST</button>
         </div>
     );
 };

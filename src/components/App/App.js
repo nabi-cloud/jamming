@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import './App.css';
+import spotifyLogo from './spotify-logo.png';
 
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
@@ -18,6 +19,8 @@ function App() {
     const [isPlaying, setIsPlaying] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
+
+    const spotifyUrl = 'https://open.spotify.com/';
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -162,6 +165,8 @@ function App() {
             </div>
 
             <footer className='footer'>
+                <p>Content from</p>
+                <a href={ spotifyUrl } target='_blank' rel='noreferrer' ><img className='spotifyLogo' src={ spotifyLogo } alt='Spotify' /></a>
                 <span>2024 | <i className="fa-brands fa-github"></i> nabi-cloud</span>
             </footer>
         </div>
