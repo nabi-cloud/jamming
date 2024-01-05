@@ -18,7 +18,7 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
                         placeholder: "My Playlist",
                         onChange: handleChangeName,
                         value: playlistName,
-                        id: 'playlistName',
+                        id: 'playlistName'
                     }}
                 />
                 <label htmlFor='playlistName'><i className="fa-solid fa-pen fa-lg"></i></label>
@@ -29,7 +29,7 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
                     isRemoval: true,
                     onRemove,
                     onPlayPreview,
-                    isPlaying,
+                    isPlaying
                 }}
             />
             <button className="Playlist-save" onClick={ onSave }>SAVE TO SPOTIFY</button>

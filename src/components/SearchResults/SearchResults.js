@@ -15,7 +15,7 @@ function SearchResults({ tracks, onAdd, onPlayPreview, isPlaying, playlistTracks
                     onAdd,
                     isRemoval: false,
                     onPlayPreview,
-                    isPlaying,
+                    isPlaying
                 }}
             />
         </div>
