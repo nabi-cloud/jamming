@@ -14,18 +14,23 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
         <div className="Playlist">
             <div className='input-container'>
                 <input
-                    placeholder="My Playlist"
-                    onChange={ handleChangeName }
-                    value={ playlistName }
+                    {...{
+                        placeholder: "My Playlist",
+                        onChange: handleChangeName,
+                        value: playlistName,
+                        id: 'playlistName',
+                    }}
                 />
-                <label><i class="fa-solid fa-pen fa-lg"></i></label>
+                <label htmlFor='playlistName'><i className="fa-solid fa-pen fa-lg"></i></label>
             </div>
             <Tracklist
-                tracks={ tracks }
-                isRemoval={ true }
-                onRemove={ onRemove }
-                onPlayPreview = { onPlayPreview }
-                isPlaying={ isPlaying }
+                {...{
+                    tracks,
+                    isRemoval: true,
+                    onRemove,
+                    onPlayPreview,
+                    isPlaying,
+                }}
             />
             <button className="Playlist-save" onClick={ onSave }>SAVE TO SPOTIFY</button>
         </div>

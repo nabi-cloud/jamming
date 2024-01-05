@@ -1,0 +1,57 @@
+.MessageBox {
+    border-radius: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease-in-out forwards;
+}
+
+.MessageBox p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    margin-left: 1rem;
+    width: 224px;
+}
+
+.MessageBox img {
+    height: 40px;
+}
+
+.success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.error {
+    background-color: #d9534f;
+    color: #fff;
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+        filter: blur(5px);
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .MessageBox {
+        width: 240px;
+    }
+
+    .MessageBox p {
+        width: 184px;
+        font-size: 0.75rem;
+    }
+}

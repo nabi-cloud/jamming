@@ -10,11 +10,13 @@ function SearchResults({ tracks, onAdd, onPlayPreview, isPlaying, playlistTracks
         <div className="SearchResults">
             <h2>Results</h2>
             <Tracklist
-                tracks={ fileredResults }
-                onAdd={ onAdd }
-                isRemoval={ false }
-                onPlayPreview = { onPlayPreview }
-                isPlaying={ isPlaying }
+                {...{
+                    tracks: fileredResults,
+                    onAdd,
+                    isRemoval: false,
+                    onPlayPreview,
+                    isPlaying,
+                }}
             />
         </div>
     );

@@ -5,9 +5,10 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Loader from '../Loader/Loader';
+import MessageBox from '../MessageBox/MessageBox';
 
 import { Spotify } from '../../utils/Spotify';
-import Loader from '../Loader/Loader';
 
 function App() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -16,6 +17,7 @@ function App() {
     const [playingAudio, setPlayingAudio] = useState(null);
     const [isPlaying, setIsPlaying] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState({ type: '', text: '' });
 
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
@@ -53,6 +55,7 @@ function App() {
             .then(() => {
                 setPlaylistName('My Playlist');
                 setPlaylistTracks([]);
+                showMessage('success', 'Playlist successfully saved!');
             })
             .finally(() => {
                 // Set loading to false after the playlist is saved
@@ -60,7 +63,7 @@ function App() {
             });
 
         } catch (error) {
-            console.log(error);
+            showMessage('error', 'Please make sure to fill in the playlist name and tracks you would like to add');
             setIsLoading(false);
         }
     };
@@ -110,9 +113,24 @@ function App() {
         }
     };
 
+    const showMessage = (type, text) => {
+        setMessage({ type, text });
+
+        setTimeout(() => {
+            closeMessage();
+        }, 5000);
+    };
+
+    const closeMessage = () => {
+        setMessage({ type: '', text: '' });
+    };
+
     return (
         <div>
             {isLoading && <Loader />}
+            {message.text && (
+                <MessageBox type={message.type} message={message.text} />
+            )}
 
             <h1>Ja<span className="highlight">mm</span>ing</h1>
             <div className="App">
@@ -121,26 +139,30 @@ function App() {
                 />
                 <div className="App-playlist">
                     <SearchResults
-                        tracks={ searchResults }
-                        onAdd={ addTrack }
-                        onPlayPreview={ playPreview }
-                        isPlaying={ isPlaying }
-                        playlistTracks={ playlistTracks }
+                        {...{
+                            tracks: searchResults,
+                            onAdd: addTrack,
+                            onPlayPreview: playPreview,
+                            isPlaying,
+                            playlistTracks,
+                        }}
                     />
                     <Playlist
-                        tracks={ playlistTracks }
-                        onRemove={ removeTrack }
-                        onNameChange={ updatePlaylistName }
-                        playlistName={ playlistName }
-                        onSave={ savePlaylist }
-                        onPlayPreview={ playPreview }
-                        isPlaying={ isPlaying }
+                        {...{
+                            tracks: playlistTracks,
+                            onRemove: removeTrack,
+                            onNameChange: updatePlaylistName,
+                            playlistName,
+                            onSave: savePlaylist,
+                            onPlayPreview: playPreview,
+                            isPlaying,
+                        }}
                     />
                 </div>
             </div>
 
             <footer className='footer'>
-                <span>2023 | <i class="fa-brands fa-github"></i> nabi-cloud</span>
+                <span>2023 | <i className="fa-brands fa-github"></i> nabi-cloud</span>
             </footer>
         </div>
     );

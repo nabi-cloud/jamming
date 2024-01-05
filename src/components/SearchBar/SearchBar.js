@@ -30,13 +30,16 @@ function SearchBar({ onSearch }) {
    return (
       <div className="SearchBar">
          <input
-            placeholder="Enter a song title"
-            onChange={ handleTermChange }
-            onKeyDown={ handleKeyPress }
+            {...{
+               placeholder: "Enter a song title",
+               onChange: handleTermChange,
+               onKeyDown: handleKeyPress,
+               id: 'searchTerm',
+            }}
          />
          <button className="SearchButton" 
             onClick={ search }
-         ><i class="fa-solid fa-magnifying-glass"></i> SEARCH</button>
+         ><i className="fa-solid fa-magnifying-glass"></i> SEARCH</button>
       </div>
    );
 };
