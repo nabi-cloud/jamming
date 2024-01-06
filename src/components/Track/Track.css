@@ -91,3 +91,21 @@
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);
 }
+
+@media only screen and (max-width: 500px) {
+    .Track {
+        padding: 1rem 0.5rem;
+    }
+
+    .Track-action {
+        margin-left: 0.25rem;
+    }
+
+    .sound-bar {
+        height: 30px;
+    }
+
+    .playAction i {
+        margin: 0 0.375rem 0 0.75rem;
+    }
+}
