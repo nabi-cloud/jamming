@@ -2,20 +2,20 @@ import React from 'react';
 
 import './Track.css';
 import audioIcon from './sound-bars.gif';
+import spotifyIcon from './spotify-icon.png';
 
 function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) {
+    const playAction = () => {
+        return isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
+        track.previewUrl === null ? <i className="fa-solid fa-play unclickable" onClick={ playPreview }></i> : <i className="fa-solid fa-play" onClick={ playPreview }></i>;
+    };
+
     // Change sign whether track is added or not
     const renderAction = () => {
         if (isRemoval) {
-            return (
-                isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
-                <button className="Track-action" onClick={ removeTrack }>-</button>
-            );
+            return <button className="Track-action" onClick={ removeTrack }>-</button>;
         } else {
-            return (
-                isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
-                <button className="Track-action" onClick={ addTrack }>+</button>
-            );
+            return <button className="Track-action" onClick={ addTrack }>+</button>;
         }
     };
 
@@ -36,16 +36,25 @@ function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) 
 
     return (
         <div className="Track">
+            <div className='playAction'>
+                { playAction() }
+            </div>
             <div>
-                <img className='Track-image'
-                    alt={ track.name }
-                    src={ track.image }
-                    onClick={ playPreview }
-                />
+                <a href={ track.albumUrl } target='_blank' rel='noreferrer' >
+                    <img className='Track-image'
+                        alt={ track.name }
+                        src={ track.image }
+                    />
+                </a>
             </div>
             <div className="Track-information">
                 <h3 style={{ color: isPlaying === track.id ? '#60E1E0' : '' }}>{track.name}</h3>
-                <p>{track.artist} | {track.album}</p>
+                <div className='subcontainer'>
+                    <a href={ track.trackUrl } target='_blank' rel='noreferrer' ><img className='spotifyIcon' src={ spotifyIcon } alt='Spotify' /></a>
+                    <p>
+                        <a href={ track.albumUrl } target='_blank' rel='noreferrer' >{track.artist}</a> | <a href={ track.artistUrl } target='_blank' rel='noreferrer'>{track.album}</a>
+                    </p>
+                </div>
             </div>
             { renderAction() }
         </div>

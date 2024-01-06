@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Playlist.css';
 import Tracklist from '../Tracklist/Tracklist';
+import spotifyIcon from './spotify-icon.png';
 
 function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlayPreview, isPlaying }) {
 
@@ -32,7 +33,8 @@ function Playlist({ tracks, onRemove, onNameChange, playlistName, onSave, onPlay
                     isPlaying
                 }}
             />
-            <button className="Playlist-save" onClick={ onSave }>SAVE TO SPOTIFY</button>
+            <button className="Playlist-save" onClick={ onSave }>SAVE PLAYLIST</button>
+            <a className='spotifyLink' href='https://open.spotify.com/' target='_blank' rel='noreferrer'><img className='icon' src={ spotifyIcon } alt='Spotify'  />OPEN SPOTIFY</a>
         </div>
     );
 };

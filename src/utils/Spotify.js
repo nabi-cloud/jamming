@@ -1,6 +1,10 @@
+import queryString from 'query-string';
+
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const redirectUri = 'https://jamming-playlist-app.netlify.app/';
+const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+const redirectUri = 'https://jamming-playlist-creator.netlify.app/';
 let accessToken = '';
+let clientAccessToken = '';
 
 export const Spotify = {
 
@@ -34,38 +38,74 @@ export const Spotify = {
         }
     },
 
+    async getClientAccessToken() {
+        if (clientAccessToken) {
+            return clientAccessToken;
+        }
+
+        let data = {
+            grant_type: "client_credentials",
+            client_id: clientId,
+            client_secret: clientSecret,
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: queryString.stringify(data),
+        };
+
+        try {
+            const response = await fetch('https://accounts.spotify.com/api/token', requestOptions);
+            const responseData = await response.json();
+    
+            clientAccessToken = responseData.access_token;
+    
+            return clientAccessToken;
+        } catch (error) {
+            console.error('Error fetching access token:', error);
+            // Handle error as needed
+        }
+    },
+
     // Search Request to Spoftify API
     search(term) {
-        const accessToken = Spotify.getAccessToken();
+        Spotify.getClientAccessToken();
 
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${clientAccessToken}`
             }
         })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Spotify Access Token Request Failed!');
-        })
-        .then(data => {
-            if (!data.tracks || !data.tracks.items) {
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Spotify Access Token Request Failed!');
+            })
+            .then(data => {
+                if (!data.tracks || !data.tracks.items) {
+                    return [];
+                }
+                return data.tracks.items.map(track => ({
+                    id: track.id,
+                    trackUrl: track.external_urls.spotify,
+                    image: track.album.images[1].url,
+                    name: track.name,
+                    artist: track.artists[0].name,
+                    artistUrl: track.artists[0].external_urls.spotify,
+                    album: track.album.name,
+                    albumUrl: track.album.external_urls.spotify,
+                    uri: track.uri,
+                    previewUrl: track.preview_url
+                }));
+            })
+            .catch(error => {
+                console.log(error);
                 return [];
-            }
-            return data.tracks.items.map(track => ({
-                id: track.id,
-                image: track.album.images[1].url,
-                name: track.name,
-                artist: track.artists[0].name,
-                album: track.album.name,
-                uri: track.uri
-            }));
-        })
-        .catch(error => {
-            console.log(error);
-            return [];
-        });
+            });
     },
 
     // Save playlist to user's Spotify account
@@ -79,55 +119,55 @@ export const Spotify = {
         let userId;
 
         return fetch(`https://api.spotify.com/v1/me`, { headers: headers })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Saving Playlist Failed!');
-        })
-        .then(jsonResponse => {
-            userId = jsonResponse.id;
-
-            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-                headers: headers,
-                method: 'POST',
-                body: JSON.stringify({ name: playlistName })
-            })
             .then(response => {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Saving Playlist Name Failed!');
+                throw new Error('Saving Playlist Failed!');
             })
             .then(jsonResponse => {
-                const playlistId = jsonResponse.id;
-                return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+                userId = jsonResponse.id;
+
+                return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
                     headers: headers,
                     method: 'POST',
-                    body: JSON.stringify({ uris: trackUris })
+                    body: JSON.stringify({ name: playlistName })
                 })
-            })
-        });
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Saving Playlist Name Failed!');
+                    })
+                    .then(jsonResponse => {
+                        const playlistId = jsonResponse.id;
+                        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+                            headers: headers,
+                            method: 'POST',
+                            body: JSON.stringify({ uris: trackUris })
+                        })
+                    })
+            });
     },
 
     // Fetch preview_url of track using id
     getTrackPreview(id) {
-        const accessToken = Spotify.getAccessToken();
-        const headers = { Authorization: `Bearer ${accessToken}` };
+        Spotify.getClientAccessToken();
+        const headers = { Authorization: `Bearer ${clientAccessToken}` };
 
         return fetch(`https://api.spotify.com/v1/tracks/${id}`, { headers: headers })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Track Preview Request Failed!');
-        })
-        .then(data => {
-            return data.preview_url;
-        })
-        .catch(error => {
-            console.log(error);
-            return;
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Track Preview Request Failed!');
+            })
+            .then(data => {
+                return data.preview_url;
+            })
+            .catch(error => {
+                console.log(error);
+                return;
+            });
     }
 };

@@ -5,9 +5,9 @@ import './SearchBar.css';
 function SearchBar({ onSearch }) {
    const [term, setTerm] = useState('');
 
-   // Effect to retrieve the search term from local storage on component mount
+   // Effect to retrieve the search term from session storage on component mount
    useEffect(() => {
-      const storedTerm = localStorage.getItem('searchTerm');
+      const storedTerm = sessionStorage.getItem('searchTerm');
       if (storedTerm) {
          setTerm(storedTerm);
       }
@@ -23,8 +23,8 @@ function SearchBar({ onSearch }) {
       const newTerm = event.target.value;
       setTerm(newTerm);
    
-      // Store the search term in local storage
-      localStorage.setItem('searchTerm', newTerm);
+      // Store the search term in session storage
+      sessionStorage.setItem('searchTerm', newTerm);
    };
 
    // Event handler when searching on key press
