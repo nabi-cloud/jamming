@@ -35,7 +35,7 @@
 
 .Playlist-save {
     cursor: pointer;
-    width: 10rem;
+    width: 10.3rem;
     padding: .77rem 0;
     border-radius: 54px;
     border-width: 0px;
@@ -44,7 +44,6 @@
     text-align: center;
     font-family: 'Work Sans', sans-serif;
     font-size: .83rem;
-    transition: background-color .25s;
     color: #25283D;
     font-weight: 700;
 }
@@ -53,6 +52,33 @@
     background: linear-gradient(to right, rgba(96, 225, 224, 0.5), rgba(135, 244, 181, 0.5));
     color: #ffffff;
     transition: all ease-out 0.3s;
+}
+
+.icon {
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.spotifyLink {
+    border: 2px solid #ffffff;
+    border-radius: 54px;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: .83rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: .77rem 0;
+    width: 10rem;
+}
+
+.spotifyLink:hover {
+    opacity: 0.5;
+    transition: opacity ease-out 0.2s;
 }
 
 ::-webkit-scrollbar {

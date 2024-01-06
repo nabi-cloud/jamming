@@ -2,7 +2,7 @@ import queryString from 'query-string';
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://jamming-playlist-creator.netlify.app/';
 let accessToken = '';
 let clientAccessToken = '';
 
