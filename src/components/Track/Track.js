@@ -7,7 +7,7 @@ import spotifyIcon from './spotify-icon.png';
 function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) {
     const playAction = () => {
         return isPlaying === track.id ? <img className='sound-bar' src={ audioIcon } alt='Playing' /> :
-        <i className="fa-solid fa-play" onClick={ playPreview }></i>;
+        track.previewUrl === null ? <i className="fa-solid fa-play unclickable" onClick={ playPreview }></i> : <i className="fa-solid fa-play" onClick={ playPreview }></i>;
     };
 
     // Change sign whether track is added or not

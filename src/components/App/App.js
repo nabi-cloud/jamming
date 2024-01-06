@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 import spotifyLogo from './spotify-logo.png';
@@ -22,6 +22,37 @@ function App() {
 
     const spotifyUrl = 'https://open.spotify.com/';
 
+    useEffect(() => {
+        const initializeSpotify = async () => {
+            await Spotify.getClientAccessToken();
+        };
+    
+        initializeSpotify();
+    }, []);
+
+    useEffect(() => {
+        const storedTerm = sessionStorage.getItem('playlist');
+        if (storedTerm) {
+           setPlaylistName(storedTerm);
+        }
+    }, []);
+
+    useEffect(() => {
+        // Load tracks from session storage when the component mounts
+        const savedTracks = sessionStorage.getItem('playlistTracks');
+        if (savedTracks) {
+            setPlaylistTracks(JSON.parse(savedTracks));
+        }
+    }, []);
+
+    useEffect(() => {
+        // Load search results from session storage when the component mounts
+        const savedSearchResults = sessionStorage.getItem('searchResults');
+        if (savedSearchResults) {
+            setSearchResults(JSON.parse(savedSearchResults));
+        }
+    }, []);
+
     // Method to add tracks into Playlist
     const addTrack = (trackToAdd) => {
         let isTrackAdded = playlistTracks.some((track) => track.id === trackToAdd.id);
@@ -29,7 +60,11 @@ function App() {
         // Check whether track is already added to Playlist
         if (!isTrackAdded) {
             // If the track is not already in the playlistTracks, add it
-            setPlaylistTracks((prevTracks) => [...prevTracks, trackToAdd]);
+            setPlaylistTracks((prevTracks) => {
+                const newTracks = [...prevTracks, trackToAdd];
+                sessionStorage.setItem('playlistTracks', JSON.stringify(newTracks));
+                return newTracks;
+            });
         }
     };
 
@@ -37,11 +72,15 @@ function App() {
     const removeTrack = (trackToRemove) => {
         const updatedPlaylist = playlistTracks.filter((track) => track.id !== trackToRemove.id);
         setPlaylistTracks(updatedPlaylist);
+        sessionStorage.setItem('playlistTracks', JSON.stringify(updatedPlaylist));
     };
 
     // Method to rename playlist
     const updatePlaylistName = (name) => {
-        setPlaylistName(name);
+        setPlaylistName((prevName) => {
+            sessionStorage.setItem('playlist', name);
+            return name;
+        });
     };
 
     // Method to save playlist to user's account
@@ -73,10 +112,17 @@ function App() {
 
     // Method to search a track
     const search = (term) => {
+        if (playingAudio) {
+            playingAudio.pause();  // Pause the currently playing audio
+            setPlayingAudio(null);
+            setIsPlaying('');
+        }
+
         try {
             Spotify.search(term)
             .then(results => {
                 setSearchResults(results);
+                sessionStorage.setItem('searchResults', JSON.stringify(results));
             })
         } catch (error) {
             console.log(error);
@@ -109,6 +155,7 @@ function App() {
                     audio.play();
                 } else {
                     console.log('No preview available for this track');
+                    console.log(previewUrl);
                 }
             })
         } catch (error) {
@@ -159,6 +206,7 @@ function App() {
                             onSave: savePlaylist,
                             onPlayPreview: playPreview,
                             isPlaying,
+                            id: 'playlist'
                         }}
                     />
                 </div>

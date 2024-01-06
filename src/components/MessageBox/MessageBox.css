@@ -27,10 +27,12 @@
     color: #fff;
 }
 
-.error {
+.error,
+.noPreview {
     background-color: #d9534f;
     color: #fff;
 }
+
 @keyframes slideIn {
     from {
         transform: translateX(100%);

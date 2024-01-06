@@ -18,7 +18,7 @@ function MessageBox({ type, message }) {
 
     return (
         <div className={`MessageBox ${type}`}>
-            <img src={ getIcon() } alt={ type === 'success' ? 'Success' : 'Error' } />
+            <img src={getIcon()} alt='Icon' />
             <p>{message}</p>
         </div>
     );
