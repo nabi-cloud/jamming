@@ -52,7 +52,7 @@ function Track({ track, onAdd, isRemoval, onRemove, onPlayPreview, isPlaying }) 
                 <div className='subcontainer'>
                     <a href={ track.trackUrl } target='_blank' rel='noreferrer' ><img className='spotifyIcon' src={ spotifyIcon } alt='Spotify' /></a>
                     <p>
-                        <a href={ track.albumUrl } target='_blank' rel='noreferrer' >{track.artist}</a> | <a href={ track.artistUrl } target='_blank' rel='noreferrer'>{track.album}</a>
+                        <a href={ track.artistUrl } target='_blank' rel='noreferrer' >{track.artist}</a> | <a href={ track.albumUrl } target='_blank' rel='noreferrer'>{track.album}</a>
                     </p>
                 </div>
             </div>
