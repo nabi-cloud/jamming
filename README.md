@@ -14,6 +14,35 @@ A React application to search tracks, discover artists and album details, and li
 
 ## Features
 
+### Spotify Library
+  - Requests to Spotify API to display content from the Spotify library.
+  - Search for tracks to include in the user's custom playlist.
+
+### Playlist Creation
+  - Create playlists by selecting tracks from the Spotify library.
+    
+### Preview Samples
+  - Provide preview samples for each track.
+
+### Loading Screen for Playlist Saving
+  - Shows a loading screen to provide feedback while the custom playlist is being saved to their Spotify account.
+
+### Notification Message
+  - Show a message box in the upper right corner for handling errors and successful playlist saving.
+
+### Persistent Search Term
+  - Maintains the user's search term even after a redirect on login.
+  - Restores the previous search term to continue the user's search query without re-entering information.
+
+### Token Refresh Handling
+  - Prevents loss of playlist information in case of a token refresh by ensuring that the playlist data persists.
+
+<br>
+
+## Feature Request Document
+
+For a detailed list of feature requests and their justifications, please refer to the [Feature Request Extension](./jamming-feature-extension.pdf) included.
+
 <br>
 
 ## Tech Stack
