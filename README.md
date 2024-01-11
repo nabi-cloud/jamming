@@ -48,6 +48,12 @@ For a detailed list of feature requests and their justifications, please refer t
 
 ## Future Work
 
+### Upload Playlist Cover Photo
+Playlist personalization experience by allowing users to upload a custom cover photo for their playlists. This feature would enable users to visually identify and differentiate their playlists, adding a touch of personal flair to their music collections.
+
+### Edit Playlist Description
+Users can edit the description of their playlists. This feature would allow users to add context, notes, or any information they wish to associate with their playlists. Enabling playlist description edits contributes to a more comprehensive and customizable user experience.
+
 <br>
 
 @Jan 2024
